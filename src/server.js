@@ -3,16 +3,18 @@ import express from "express";
 const PORT = 4000;
 const app = express();
 
-const handleHome = (req, res) => {
+const logger = (req, res, next) => {   
+    console.log(`method : ${req.method}, url : ${req.url}`);
+    next();
+}
+
+const controllerHome = (req, res) => {
     return res.send("Hello");
 }
 
-const handleLogin = (req, res) => {
-    return res.send("Login Page");
-}
+app.use(logger);
+app.get("/", controllerHome);
 
-app.get("/", handleHome);
-app.get("/login", handleLogin);
 
 const handleListning = () => 
     console.log(`✅ Server is linstening on port http://localhost:${PORT} 🎉`);
