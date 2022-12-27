@@ -4,9 +4,9 @@ import { upload, seeVideo, editVideo, deleteVideo } from "../controllers/videoCo
 const videoRouter = express.Router();
 
 videoRouter.get("/upload", upload);
-videoRouter.get("/:id", seeVideo);
-videoRouter.get("/:id/edit", editVideo);
-videoRouter.get("/:id/delete", deleteVideo);
+videoRouter.get("/:id(\\d+)", seeVideo);
+videoRouter.get("/:id(\\d+)/edit", editVideo);
+videoRouter.get("/:id(\\d+)/delete", deleteVideo);
 
 
 export default videoRouter;
