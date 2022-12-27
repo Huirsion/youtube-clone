@@ -3,13 +3,11 @@ export const trending = (req, res) => {
 }
 
 export const seeVideo = (req, res) => {
-    console.log(req.params);
-    // return res.send("Watch Video");
-    return res.send(`Watch Video #${req.params.id}`);
+    return res.render("watch");
 }
 
 export const editVideo = (req, res) => {
-    return res.send("Edit Video");
+    return res.render("edit");
 }
 
 export const searchVideo = (req, res) => {
