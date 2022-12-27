@@ -9,13 +9,14 @@
 
 # Users Router
 
-/users/edit -> Edit User (유저 프로필 수정)
-/users/delete -> Delete User (유저 삭제)
+/users/:id -> See User (유저 프로필 조회)
+/users/logout -> Logout (로그아웃)
+/users/edit -> Edit My Profile (자신의 프로필 수정)
+/users/delete -> Delete My Profile (자신의 프로필 삭제)
 
 # Videos Router
 
-/videos/watch -> Watch Video (동영상 보기)
-/videos/edit -> Edit Video (동영상 수정)
-/videos/delete -> Delete Video (동영상 삭제)
-/videos/comments -> Comment on a Video (동영상에 댓글 달기)
-/videos/commnets/delete -> Delete a Comment of a Video (댓글 삭제)
+/videos/:id -> Watch Video (동영상 보기, 동영상의 id)
+/videos/:id/edit -> Edit Video (동영상 수정)
+/videos/:id/delete -> Delete Video (동영상 삭제)
+/videos/upload -> Upload Video (동영상 업로드)
