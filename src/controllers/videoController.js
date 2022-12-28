@@ -29,11 +29,11 @@ export const trending = (req, res) => {
     return res.render("home", {pageTitle : "Home", videos});
 }
 
-export const seeVideo = (req, res) => {
+export const watchVideo = (req, res) => {
     // const id = req.params.id;
     const { id } = req.params; // ES6
     const video = videos[id-1];
-    return res.render("watch", {pageTitle : `Watching ${video.title}`});
+    return res.render("watch", {pageTitle : `Watching ${video.title}`, video : video});
 }
 
 export const editVideo = (req, res) => {
