@@ -1,5 +1,10 @@
+const fakeUser = {
+    username : "Huir",
+    loggedIn : false,
+}
+
 export const trending = (req, res) => {
-    return res.render("home", {pageTitle : "Home"});
+    return res.render("home", {pageTitle : "Home", fakeUser: fakeUser});
 }
 
 export const seeVideo = (req, res) => {
