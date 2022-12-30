@@ -20,3 +20,11 @@
 /videos/:id/edit -> Edit Video (동영상 수정)
 /videos/:id/delete -> Delete Video (동영상 삭제)
 /videos/upload -> Upload Video (동영상 업로드)
+
+# Database
+# CRUD
+
+Create - 생성
+Read - 읽기
+Update - 수정
+Delete - 삭제
