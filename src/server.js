@@ -1,3 +1,4 @@
+import "./db.js";
 import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
@@ -20,6 +21,6 @@ app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
 const handleListning = () => 
-    console.log(`✅ Server is linstening on port http://localhost:${PORT} 🎉`);
+    console.log(`✅ Server is linstening on http://localhost:${PORT} 🎉`);
 
 app.listen(PORT, handleListning);
