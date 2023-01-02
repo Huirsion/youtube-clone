@@ -1,51 +1,27 @@
-let videos = [
-    {
-        title : "Vlog #1",
-        rating : 5,
-        comments : 2,
-        createdAt : "2 minutes ago",
-        views : 59,
-        id : 1,
-    },
-    {
-        title : "Vlog #2",
-        rating : 5,
-        comments : 1000,
-        createdAt : "43 minutes ago",
-        views : 7648,
-        id : 2,
-    },
-    {
-        title : "Vlog #3",
-        rating : 3,
-        comments : 23451,
-        createdAt : "10 minutes ago",
-        views : 23514235,
-        id : 3,
-    },
-];
+import Video from "../models/Video";
 
-export const trending = (req, res) => {
-    return res.render("home", {pageTitle : "Home", videos});
+// Video.find({}, (error, videos) => {});
+
+export const home = async(req, res) => {
+    const videos = await Video.find();
+    console.log(videos);
+    return res.render("home", {pageTitle : "Home", videos : []});
 }
 
 export const watchVideo = (req, res) => {
     // const id = req.params.id;
     const { id } = req.params; // ES6
-    const video = videos[id-1];
-    return res.render("watch", {pageTitle : `Watching : ${video.title}`, video : video});
+    return res.render("watch", {pageTitle : `Watching`,});
 }
 
 export const getEdit = (req, res) => {
     const { id } = req.params; // ES6
-    const video = videos[id-1];
-    return res.render("edit", {pageTitle : `Editing : ${video.title}`, video});
+    return res.render("edit", {pageTitle : `Editing`,});
 }
 
 export const postEdit = (req, res) => {
     const { id } = req.params;
     const { title } = req.body;
-    videos[id - 1].title = title;
     // console.log("body : ", req.body);
     return res.redirect(`/videos/${id}`);
 }
@@ -55,16 +31,17 @@ export const getUpload = (req, res) => {
 }
 
 export const postUpload = (req, res) => {
-    const { title } = req.body;
-    const newVideo = {
-        // title : req.body.title,
-        title : title,
-        rating : 0,
-        comments : 0,
-        createdAt : "Just now",
-        views : 0,
-        id : videos.length + 1,
-    }
-    videos.push(newVideo);
+    const { title, description, hashtags } = req.body;
+    const video = new Video({
+        title, // title : title,
+        description, // description : description,
+        createdAt: Date.now(),
+        hashtags: hashtags.split(",").map((word) => `#${word}`),
+        meta: {
+            views: 0,
+            rating: 0,
+        },
+    });
+    console.log("Video : ", video);
     return res.redirect("/");
 }
