@@ -7,4 +7,7 @@ block content
             each hashtag in video.hashtags
                 li=hashtag
         small=video.createdAt
-    a(href=`${video.id}/edit`) Edit Video &rarr;
+    div
+        a(href=`${video.id}/edit`) Edit Video &rarr;
+    div
+        a(href=`${video.id}/delete`) Delete Video &rarr;
