@@ -1,4 +1,5 @@
 import User from "../models/User";
+import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => {
     return res.render("join", { pageTitle : "Sign In" });
@@ -20,14 +21,47 @@ export const postJoin = async (req, res) => {
             errorMessage : "This username/email is already taken."
         });
     }
-    await User.create({
-        name,
-        username,
-        email,
-        password,
-        location,
-    });
-    return res.redirect("/login");
+    try {
+        await User.create({
+            name,
+            username,
+            email,
+            password,
+            location,
+        });
+        return res.redirect("/login");
+    } catch(error) {
+        return res.status(400).render("join", {
+            pageTitle: "Join",
+            errorMessage : error._message,
+        });
+    }
+}
+
+export const getLogin = (req, res) => {
+    return res.render("login", { pageTitle : "Log In" });
+}
+
+export const postLogin = async (req, res) => {
+    const { username, password } = req.body;
+    const pageTitle = "Log In";
+    // check account exists
+    const user = await User.findOne({ username });
+    if(!user){
+        return res.status(400).render("login", { 
+            pageTitle, 
+            errorMessage : "This username does not exists." 
+        });
+    }
+    // check password correct
+    const ok = await bcrypt.compare(password, user.password);
+    if(!ok){
+        return res.status(400).render("login", { 
+            pageTitle, 
+            errorMessage : "Wrong password." 
+        });
+    }
+    return res.redirect("/");
 }
 
 export const editUser = (req, res) => {
@@ -36,10 +70,6 @@ export const editUser = (req, res) => {
 
 export const deleteUser = (req, res) => {
     res.send("User Delete");
-}
-
-export const login = (req, res) => {
-    res.send("Login")
 }
 
 export const logout = (req, res) => {
